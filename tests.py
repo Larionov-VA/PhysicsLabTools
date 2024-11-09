@@ -9,7 +9,7 @@ from tools import (
     relativeError,
     answerInStandardForm
 )
-
+# Переделать потом тесты, сейчас они корявые
 class TestTools(unittest.TestCase):
 
     def test_findingTheSampleByTheMean(self):
