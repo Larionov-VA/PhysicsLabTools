@@ -1,7 +1,3 @@
-
-
-
-
 def findingTheSampleByTheMean(listOfAverages: list[float]) -> dict:
     """Находит значения выборки при известном среднем"""
     from random import random
@@ -119,4 +115,4 @@ def answerInStandardForm(listOfSamples: list[float], instrumentError: float) -> 
 # print(relativeError([2.73,2.85,2.90,2.94,2.98]))
 
 """Пример записи в стандартной форме"""
-print(answerInStandardForm([2.73,2.85,2.90,2.94,2.98], 0.01))
+# print(answerInStandardForm([2.73,2.85,2.90,2.94,2.98], 0.01))
