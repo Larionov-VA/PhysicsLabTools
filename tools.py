@@ -51,9 +51,28 @@ def findingStandardDeviation(listOfSamples: list[float]) -> float:
     return standardDeviation
 
 
-def randomError(listOfSamples: list[float]) -> float:
-    """Находит случайную погрешность при N = 5, p = 95%"""
-    const = 2.78
+def randomError(listOfSamples: list[float], confidence_error = 0.95) -> float:
+    """Находит случайную погрешность при N = 5, p = 95%
+       
+       update 12.11: выборка из N>2 элементов 
+       при доверительной погрешности 'p'= 0.68,'p'= 0.95,'p'= 0.99"""
+    
+    
+    t_distribution_value = {0.99: {1: 0, 2: 63.7, 3: 9.92, 4: 5.84, 5: 4.60, 6: 4.03, 7: 3.71, 8: 3.5, 9: 3.36, 10: 3.25},
+                            0.95: {1: 0, 2: 12.7, 3: 4.30, 4: 3.18, 5: 2.77, 6: 2.57, 7: 2.45, 8: 2.36, 9: 2.31, 10: 2.26},
+                            0.68: {1: 0, 2: 1.82, 3: 1.31, 4: 1.19, 5: 1.13, 6: 1.10, 7: 1.08, 8: 1.07, 9: 1.06, 10: 1.05}
+                            }
+    t_distribution_infinityN_value = {0.99: 2.58,
+                                      0.95: 1.96,
+                                      0.68: 0.99
+                                      }
+    
+    N = len(listOfSamples)
+    if N <= 10:
+        const = t_distribution_value[confidence_error][N]
+    else:
+        const = t_distribution_infinityN_value[confidence_error]
+    
     error = const*findingStandardDeviation(listOfSamples)
     return error
 
@@ -96,28 +115,33 @@ def answerInStandardForm(listOfSamples: list[float], instrumentError: float) -> 
     return theAverage, fullError
 
 
+"""
+list_1 = [2.8, 3.40, 3.90, 4.90, 5.6] #средние для создания выборки 
+list_2 = [2.73, 2.85, 2.90, 2.94, 2.98] #выборка 
+teta = 0.01 #погрешность
+"""
 
 """Пример нахождения выборки по средним значениям: 2.8, 3.40, 3.90, 4.90, 5.60"""
-# print(findingTheSampleByTheMean([2.8,3.40,3.90,4.90,5.6]))
+# print(findingTheSampleByTheMean(list_1))
 
 """Пример проверки выборки на промах"""
-# print(checkingTheSamplesForErrors([2.73,2.85,2.90,2.94,2.98]))
-# print(checkingTheSamplesForErrors([3.33,2.85,2.90,2.94,2.98]))
+# print(checkingTheSamplesForErrors(list_2))
+# print(checkingTheSamplesForErrors(list_2))
 
 """Пример нахождения среднего значения по выборке"""
-# print(findingTheAverage([2.73,2.85,2.90,2.94,2.98]))
+# print(findingTheAverage(list_2))
 
 """Пример рассчета СКО"""
-# print(findingStandardDeviation([2.73,2.85,2.90,2.94,2.98]))
+# print(findingStandardDeviation(list_2))
 
 """Пример нахождения случайной погрешности по выборке"""
-# print(randomError([2.73,2.85,2.90,2.94,2.98]))
+# print(randomError(list_2, confidence_error)
 
 """Пример нахождения полной погрешности, в данном случае приборная погрешность = 0.01"""
-# print(fullErrorOfTheResult([2.73,2.85,2.90,2.94,2.98], 0.01))
+# print(fullErrorOfTheResult(list_2, teta))
 
 """Пример вычисления относительной погрешности, ответ в процентах"""
-# print(relativeError([2.73,2.85,2.90,2.94,2.98]))
+# print(relativeError(list_2))
 
 """Пример записи в стандартной форме"""
-# print(answerInStandardForm([2.73,2.85,2.90,2.94,2.98], 0.01))
+# print(answerInStandardForm(list_2, teta))
