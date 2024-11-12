@@ -38,11 +38,16 @@ def findingTheAverage(listOfSamples: list[float]) -> float:
 
 
 def findingStandardDeviation(listOfSamples: list[float]) -> float:
-    """Рассчитывает СКО (среднеквадратичное отклонение) выборки 5 элементов"""
+    """Рассчитывает СКО (среднеквадратичное отклонение) выборки 5* элементов
+       *update 12.11: выборка из N элементов
+    """
     from math import sqrt
     average = findingTheAverage(listOfSamples)
-    x1, x2, x3, x4, x5 = listOfSamples
-    standardDeviation = sqrt(((x1-average)**2+(x2-average)**2+(x3-average)**2+(x4-average)**2+(x5-average)**2)/20)
+    N = len(listOfSamples)
+    summ = 0 #сумма всех (xi-average)**2
+    for i in range(N):
+        summ += (listOfSamples[i]-average)**2
+    standardDeviation = sqrt((summ)/(N*(N-1)))
     return standardDeviation
 
 
