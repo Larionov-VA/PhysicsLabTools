@@ -6,7 +6,7 @@ from tools import (findingTheSampleByTheMean,
                    fullErrorOfTheResult, 
                    relativeError, 
                    answerInStandardForm)
-from make_docxfile import makeDocument
+# from make_docxfile import makeDocument
 
 def inputSamples():
     samples = []
