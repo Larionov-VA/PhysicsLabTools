@@ -70,7 +70,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="generate">
       <property name="text">
        <string>Generate answer</string>
       </property>
@@ -78,6 +78,9 @@
     </item>
     <item>
      <widget class="QTextEdit" name="console">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
       <property name="placeholderText">
        <string/>
       </property>

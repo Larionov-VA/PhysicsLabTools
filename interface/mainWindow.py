@@ -84,13 +84,14 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addLayout(self.gridLayout)
 
-        self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(u"pushButton")
+        self.generate = QPushButton(self.centralwidget)
+        self.generate.setObjectName(u"generate")
 
-        self.verticalLayout_3.addWidget(self.pushButton)
+        self.verticalLayout_3.addWidget(self.generate)
 
         self.console = QTextEdit(self.centralwidget)
         self.console.setObjectName(u"console")
+        self.console.setReadOnly(True)
 
         self.verticalLayout_3.addWidget(self.console)
 
@@ -124,7 +125,7 @@ class Ui_MainWindow(object):
         self.text_3.setText(QCoreApplication.translate("MainWindow", u"Value 3", None))
         self.text_4.setText(QCoreApplication.translate("MainWindow", u"Value 4", None))
         self.text_5.setText(QCoreApplication.translate("MainWindow", u"Value 5", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Generate answer", None))
+        self.generate.setText(QCoreApplication.translate("MainWindow", u"Generate answer", None))
         self.console.setPlaceholderText("")
         self.status.setText("")
     # retranslateUi
