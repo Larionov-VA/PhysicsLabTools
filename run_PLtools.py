@@ -28,8 +28,7 @@ def inputSamples():
 
 
 def gen_answer(s):
-    # Происходит деление на ноль
-    # print(checkingTheSamplesForErrors(s))
+    print(checkingTheSamplesForErrors(s))
     print(findingTheAverage(s))
     print(findingStandardDeviation(s))
     print(randomError(s))
