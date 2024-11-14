@@ -11,10 +11,9 @@ def main_init(main_window: QMainWindow):
 # выводит в сгенерированые значения в консоль окна
 def generate_awnser(main_window):
     mw = main_window
-    list_of_values = get_values(mw)
 
     # проверка на случай ввода неверных значений
-    try:list_of_values = list(map(float, list_of_values))
+    try:list_of_values = list(map(float, get_values(mw)))
     except ValueError:
         mw.ui.console.setText("Введённые значения не являются числами.")
     else:
@@ -26,13 +25,15 @@ def generate_awnser(main_window):
 def change_values(main_window):
     mw = main_window
     try: mw.current_amount = int(mw.ui.amount_of_values_to_change.text())
-    except ValueError:
+    except ValueError or AttributeError:
         pass
     else:
+        mw.ui.amount_of_values_to_change.clear()
         mw.ui.values.setRowCount(mw.current_amount)
 
 def get_values(main_window) -> list:
     returned_list = list()
     for i in range(main_window.current_amount):
-        returned_list.append(main_window.ui.values.item(i, 0).text())
+        try: returned_list.append(main_window.ui.values.item(i, 0).text())
+        except AttributeError: raise ValueError
     return returned_list
