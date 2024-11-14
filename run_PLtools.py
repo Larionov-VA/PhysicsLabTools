@@ -38,4 +38,4 @@ def gen_answer(s):
 
 
 if __name__ == "__main__":
-    gen_answer(inputSamples)
+    gen_answer(inputSamples())
