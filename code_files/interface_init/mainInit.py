@@ -3,12 +3,16 @@ from code_files.std_capture import Capturing
 
 # инициализация кнопок основного окна
 def main_init(main_window: QMainWindow):
+    main_window.current_amount = 10
     main_window.ui.generate.clicked.connect(lambda: generate_awnser(main_window))
+    main_window.ui.change_amount_of_values.clicked.connect(lambda: change_values(main_window))
+
 
 # выводит в сгенерированые значения в консоль окна
 def generate_awnser(main_window):
     mw = main_window
-    list_of_values = [mw.ui.value_1.text(), mw.ui.value_2.text(), mw.ui.value_3.text(), mw.ui.value_4.text(), mw.ui.value_5.text()]
+    list_of_values = get_values(mw)
+
     # проверка на случай ввода неверных значений
     try:list_of_values = list(map(float, list_of_values))
     except ValueError:
@@ -18,3 +22,17 @@ def generate_awnser(main_window):
         with Capturing() as output:
             gen_answer(list_of_values)
         mw.ui.console.setText("\n".join(output))
+
+def change_values(main_window):
+    mw = main_window
+    try: mw.current_amount = int(mw.ui.amount_of_values_to_change.text())
+    except ValueError:
+        pass
+    else:
+        mw.ui.values.setRowCount(mw.current_amount)
+
+def get_values(main_window) -> list:
+    returned_list = list()
+    for i in range(main_window.current_amount):
+        returned_list.append(main_window.ui.values.item(i, 0).text())
+    return returned_list
