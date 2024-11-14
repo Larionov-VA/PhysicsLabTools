@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLineEdit,
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLineEdit,
     QMainWindow, QMenuBar, QPushButton, QSizePolicy,
-    QSpacerItem, QStatusBar, QTextEdit, QVBoxLayout,
-    QWidget)
+    QSpacerItem, QStatusBar, QTableWidget, QTableWidgetItem,
+    QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -29,80 +29,85 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_3 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.gridLayout = QGridLayout()
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.value_1 = QLineEdit(self.centralwidget)
-        self.value_1.setObjectName(u"value_1")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.values = QTableWidget(self.centralwidget)
+        if (self.values.columnCount() < 1):
+            self.values.setColumnCount(1)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.values.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        if (self.values.rowCount() < 10):
+            self.values.setRowCount(10)
+        self.values.setObjectName(u"values")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.values.sizePolicy().hasHeightForWidth())
+        self.values.setSizePolicy(sizePolicy)
+        self.values.setRowCount(10)
 
-        self.gridLayout.addWidget(self.value_1, 1, 0, 1, 1)
+        self.verticalLayout.addWidget(self.values)
 
-        self.value_3 = QLineEdit(self.centralwidget)
-        self.value_3.setObjectName(u"value_3")
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.amount_of_values_to_change = QLineEdit(self.centralwidget)
+        self.amount_of_values_to_change.setObjectName(u"amount_of_values_to_change")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.amount_of_values_to_change.sizePolicy().hasHeightForWidth())
+        self.amount_of_values_to_change.setSizePolicy(sizePolicy1)
 
-        self.gridLayout.addWidget(self.value_3, 1, 2, 1, 1)
+        self.horizontalLayout_2.addWidget(self.amount_of_values_to_change)
 
-        self.value_2 = QLineEdit(self.centralwidget)
-        self.value_2.setObjectName(u"value_2")
+        self.change_amount_of_values = QPushButton(self.centralwidget)
+        self.change_amount_of_values.setObjectName(u"change_amount_of_values")
 
-        self.gridLayout.addWidget(self.value_2, 1, 1, 1, 1)
-
-        self.value_4 = QLineEdit(self.centralwidget)
-        self.value_4.setObjectName(u"value_4")
-
-        self.gridLayout.addWidget(self.value_4, 1, 3, 1, 1)
-
-        self.value_5 = QLineEdit(self.centralwidget)
-        self.value_5.setObjectName(u"value_5")
-
-        self.gridLayout.addWidget(self.value_5, 1, 4, 1, 1)
-
-        self.text_1 = QLabel(self.centralwidget)
-        self.text_1.setObjectName(u"text_1")
-
-        self.gridLayout.addWidget(self.text_1, 0, 0, 1, 1)
-
-        self.text_2 = QLabel(self.centralwidget)
-        self.text_2.setObjectName(u"text_2")
-
-        self.gridLayout.addWidget(self.text_2, 0, 1, 1, 1)
-
-        self.text_3 = QLabel(self.centralwidget)
-        self.text_3.setObjectName(u"text_3")
-
-        self.gridLayout.addWidget(self.text_3, 0, 2, 1, 1)
-
-        self.text_4 = QLabel(self.centralwidget)
-        self.text_4.setObjectName(u"text_4")
-
-        self.gridLayout.addWidget(self.text_4, 0, 3, 1, 1)
-
-        self.text_5 = QLabel(self.centralwidget)
-        self.text_5.setObjectName(u"text_5")
-
-        self.gridLayout.addWidget(self.text_5, 0, 4, 1, 1)
+        self.horizontalLayout_2.addWidget(self.change_amount_of_values)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout)
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
+
+
+        self.horizontalLayout.addLayout(self.verticalLayout)
+
+        self.verticalLayout_4 = QVBoxLayout()
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.console = QTextEdit(self.centralwidget)
+        self.console.setObjectName(u"console")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.console.sizePolicy().hasHeightForWidth())
+        self.console.setSizePolicy(sizePolicy2)
+        self.console.setReadOnly(True)
+
+        self.verticalLayout_4.addWidget(self.console)
 
         self.generate = QPushButton(self.centralwidget)
         self.generate.setObjectName(u"generate")
 
-        self.verticalLayout_3.addWidget(self.generate)
+        self.verticalLayout_4.addWidget(self.generate)
 
-        self.console = QTextEdit(self.centralwidget)
-        self.console.setObjectName(u"console")
-        self.console.setReadOnly(True)
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_3.addWidget(self.console)
+        self.verticalLayout_4.addItem(self.verticalSpacer_2)
 
-        self.status = QLabel(self.centralwidget)
-        self.status.setObjectName(u"status")
 
-        self.verticalLayout_3.addWidget(self.status)
+        self.horizontalLayout.addLayout(self.verticalLayout_4)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.verticalLayout_3.addItem(self.verticalSpacer)
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -120,13 +125,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.text_1.setText(QCoreApplication.translate("MainWindow", u"Value 1", None))
-        self.text_2.setText(QCoreApplication.translate("MainWindow", u"Value 2", None))
-        self.text_3.setText(QCoreApplication.translate("MainWindow", u"Value 3", None))
-        self.text_4.setText(QCoreApplication.translate("MainWindow", u"Value 4", None))
-        self.text_5.setText(QCoreApplication.translate("MainWindow", u"Value 5", None))
-        self.generate.setText(QCoreApplication.translate("MainWindow", u"Generate answer", None))
-        self.console.setPlaceholderText("")
-        self.status.setText("")
+        ___qtablewidgetitem = self.values.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Values", None));
+        self.change_amount_of_values.setText(QCoreApplication.translate("MainWindow", u"Change amount of values", None))
+        self.generate.setText(QCoreApplication.translate("MainWindow", u"Generate", None))
     # retranslateUi
 
