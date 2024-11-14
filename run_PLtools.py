@@ -6,7 +6,7 @@ from tools import (findingTheSampleByTheMean,
                    fullErrorOfTheResult, 
                    relativeError, 
                    answerInStandardForm)
-
+# from make_docxfile import makeDocument
 
 def inputSamples():
     samples = []
@@ -27,8 +27,7 @@ def inputSamples():
     return samples
 
 
-if __name__ == "__main__":
-    s = inputSamples()
+def gen_answer(s):
     print(checkingTheSamplesForErrors(s))
     print(findingTheAverage(s))
     print(findingStandardDeviation(s))
@@ -38,3 +37,5 @@ if __name__ == "__main__":
     print(answerInStandardForm(s, 0.01))
 
 
+if __name__ == "__main__":
+    gen_answer(inputSamples())

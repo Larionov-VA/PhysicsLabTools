@@ -22,8 +22,8 @@ def checkingTheSamplesForErrors(listOfSamples: list[float]) -> bool:
     listOfSamples = sorted(listOfSamples)
     U = 0.64
     R = listOfSamples[-1]-listOfSamples[0]
-    U1 = abs(listOfSamples[1]-listOfSamples[0])/R
-    U2 = abs(listOfSamples[-1]-listOfSamples[-2])/R
+    U1 = abs(listOfSamples[1]-listOfSamples[0])/(R + 0.0000000001) # (R + 0.0000000001) - защита от деления на ноль
+    U2 = abs(listOfSamples[-1]-listOfSamples[-2])/(R + 0.0000000001)
     
     if U1 < U and U2 < U:
         return True

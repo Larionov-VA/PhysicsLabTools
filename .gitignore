@@ -10,3 +10,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# связанное с компиляцией
+dist/
+build/
+*.spec
