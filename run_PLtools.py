@@ -35,7 +35,7 @@ def gen_answer(s):
     print(fullErrorOfTheResult(s, 0.01))
     print(relativeError(s))
     print(answerInStandardForm(s, 0.01))
-    # makeDocument(t="v", average=findingTheAverage(inputSamples()))
+
 
 if __name__ == "__main__":
     gen_answer(inputSamples)
