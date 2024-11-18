@@ -98,7 +98,7 @@ def makeDocument(s: list, instrumentError: int|float, variable: str):
     file.save('{}.docx'.format(variable))
 
 
-if __name__ == '__main__':
+def inputs_makeDocument():
     samples = inputSamples()
     instrumental_error = float(input('Введите приборную погрешность: ').replace(',', '.'))
     variable_sign = input('Введите символ, которым обозначаются обрабатываемые значения: ')

@@ -1,4 +1,5 @@
-from tools import (findingTheSampleByTheMean, 
+from make_docx import inputs_makeDocument
+from tools import (findingTheSampleByTheMean,
                    checkingTheSamplesForErrors, 
                    findingTheAverage, 
                    findingStandardDeviation, 
@@ -35,6 +36,7 @@ def gen_answer(s):
     print(fullErrorOfTheResult(s, 0.01))
     print(relativeError(s))
     print(answerInStandardForm(s, 0.01))
+    inputs_makeDocument()
 
 
 if __name__ == "__main__":
