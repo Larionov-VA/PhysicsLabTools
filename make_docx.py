@@ -1,6 +1,5 @@
-from tools import (findingTheSampleByTheMean,
-                   checkingTheSamplesForErrors,
-                   findingTheAverage,
+from run_PLtools import inputSamples
+from tools import (findingTheAverage,
                    findingStandardDeviation,
                    randomError,
                    fullErrorOfTheResult,
@@ -13,6 +12,7 @@ from os import path, remove
 
 
 def round_to_4_significant(x):
+    """Округляет число до первого значащего + 3 следующих цифры"""
     try:
         return round(x, -int(floor(log10(abs(x))) - 3))
     except ValueError:
@@ -20,10 +20,14 @@ def round_to_4_significant(x):
 
 
 def num_to_str(x):
+    """Приводит вещественное число к привычному глазу виду"""
     return format_float_positional(x).replace('.', ',')
 
 
-def makeDocument(s: list):
+def makeDocument(s: list, instrumentError: int|float, variable: str):
+    """Создаёт файл {variable}.docx с обработкой результатов прямых измерений.
+
+    ! Не рекомендуется открывать файл Template.docx, так как это можно навредить шаблону."""
     s.sort()
     file = DocxTemplate('Template.docx')
     v = {
@@ -59,16 +63,16 @@ def makeDocument(s: list):
         'skoelements': []
     }
     try:
-        context['V'] = v[len(s)]
+        context['V'] = num_to_str(v[len(s)])
     except KeyError:
         raise ValueError('Невозможно провести проверку на промахи с помощью СКО. Выборка должна содержать от 3 до 12 элементов.')
     try:
-        context['t'] = t[len(s)]
+        context['t'] = num_to_str(t[len(s)])
     except:
         raise ValueError('Невозможно вывести случайную погрешность с помощью коэффициентов Стьюдента. Выборка должна содержать от 2 до 10 элементов.')
-    context['average'] = average = round_to_4_significant(findingTheAverage(s))
-    context['variable'] = variable = input('Введите символ, которым обозначается введённые значения: ')
-    instrumenterror = float(input('Введите приборную погрешность: ').replace(',', '.'))
+    average = round_to_4_significant(findingTheAverage(s))
+    context['average'] = num_to_str(average)
+    context['variable'] = variable
     skosum = 0
     for index, value in enumerate(s, 1):
         skosum += (s[index-1] - average) ** 2
@@ -84,12 +88,18 @@ def makeDocument(s: list):
     context['skos'] = num_to_str(round_to_4_significant(findingStandardDeviation(s)))
     context['nomisses'] = True if all((s[0] - average < skomiss, s[-1] - average < skomiss)) else False
     context['randomerror'] = num_to_str(round_to_4_significant(randomError(s)))
-    context['instrumenterror'] = num_to_str(instrumenterror)
-    context['fullerror'] = num_to_str(round_to_4_significant(fullErrorOfTheResult(s, instrumenterror)))
-    context['relativeerror'] = num_to_str(round(fullErrorOfTheResult(s, instrumenterror) / average * 100, 1))
-    context['answer'], context['answererror'] = answerInStandardForm(s, instrumenterror)
+    context['instrumenterror'] = num_to_str(instrumentError)
+    context['fullerror'] = num_to_str(round_to_4_significant(fullErrorOfTheResult(s, instrumentError)))
+    context['relativeerror'] = num_to_str(round(fullErrorOfTheResult(s, instrumentError) / average * 100, 1))
+    context['answer'], context['answererror'] = map(num_to_str, answerInStandardForm(s, instrumentError))
     file.render(context)
     if path.exists('{}.docx'.format(variable)):
         remove('{}.docx'.format(variable))
     file.save('{}.docx'.format(variable))
-    print('Результат сохранён в файле {}.docx'.format(variable))
+
+
+def inputs_makeDocument():
+    samples = inputSamples()
+    instrumental_error = float(input('Введите приборную погрешность: ').replace(',', '.'))
+    variable_sign = input('Введите символ, которым обозначаются обрабатываемые значения: ')
+    makeDocument(samples, instrumental_error, variable_sign)
