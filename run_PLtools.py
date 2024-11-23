@@ -1,4 +1,5 @@
 from make_docx import inputs_makeDocument
+from sample_input import inputSamples
 from tools import (findingTheSampleByTheMean,
                    checkingTheSamplesForErrors, 
                    findingTheAverage, 
@@ -9,26 +10,7 @@ from tools import (findingTheSampleByTheMean,
                    answerInStandardForm)
 
 
-def inputSamples():
-    samples = []
-    i = 1
-    print("Значения выборки печатайте поочередно в формате float, после каждого значения нажимайте Enter")
-    while True:
-        sample = input(f"Введите {i} значение: \n")
-        if sample == "" or sample == "\t" or sample == "\n":
-            print(f"Вы записали значения {samples}, прервать запись?")
-            n = input("Y/N\n")
-            if n == "Y":
-                break
-            else:
-                continue
-        sample = sample.replace(",",".")
-        samples.append(float(sample))
-        i += 1
-    return samples
-
-
-def gen_answer(s):
+def gen_answer(s, manual=True):
     print(checkingTheSamplesForErrors(s))
     print(findingTheAverage(s))
     print(findingStandardDeviation(s))
@@ -36,7 +18,8 @@ def gen_answer(s):
     print(fullErrorOfTheResult(s, 0.01))
     print(relativeError(s))
     print(answerInStandardForm(s, 0.01))
-    inputs_makeDocument()
+    if manual:
+        inputs_makeDocument()
 
 
 if __name__ == "__main__":
