@@ -15,10 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLineEdit,
-    QMainWindow, QMenuBar, QPushButton, QSizePolicy,
-    QSpacerItem, QStatusBar, QTableWidget, QTableWidgetItem,
-    QTextEdit, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QMainWindow, QMenuBar,
+    QPushButton, QSizePolicy, QSpacerItem, QStatusBar,
+    QTableWidget, QTableWidgetItem, QTextEdit, QVBoxLayout,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -95,6 +96,43 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addWidget(self.generate)
 
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.label = QLabel(self.centralwidget)
+        self.label.setObjectName(u"label")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy3)
+
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
+        self.label_2 = QLabel(self.centralwidget)
+        self.label_2.setObjectName(u"label_2")
+        sizePolicy3.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy3)
+
+        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
+
+        self.instrument_error = QLineEdit(self.centralwidget)
+        self.instrument_error.setObjectName(u"instrument_error")
+
+        self.gridLayout.addWidget(self.instrument_error, 0, 1, 1, 1)
+
+        self.symbol = QLineEdit(self.centralwidget)
+        self.symbol.setObjectName(u"symbol")
+
+        self.gridLayout.addWidget(self.symbol, 1, 1, 1, 1)
+
+
+        self.verticalLayout_4.addLayout(self.gridLayout)
+
+        self.generate_docx = QPushButton(self.centralwidget)
+        self.generate_docx.setObjectName(u"generate_docx")
+
+        self.verticalLayout_4.addWidget(self.generate_docx)
+
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_4.addItem(self.verticalSpacer_2)
@@ -124,10 +162,13 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"PhysicsLabTools", None))
         ___qtablewidgetitem = self.values.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Values", None));
         self.change_amount_of_values.setText(QCoreApplication.translate("MainWindow", u"Change amount of values", None))
         self.generate.setText(QCoreApplication.translate("MainWindow", u"Generate", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Instrument error :", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Symbol :", None))
+        self.generate_docx.setText(QCoreApplication.translate("MainWindow", u"Generate .docx", None))
     # retranslateUi
 

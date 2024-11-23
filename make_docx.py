@@ -1,4 +1,4 @@
-from run_PLtools import inputSamples
+from sample_input import inputSamples
 from tools import (findingTheAverage,
                    findingStandardDeviation,
                    randomError,
